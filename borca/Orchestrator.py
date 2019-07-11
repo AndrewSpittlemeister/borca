@@ -1,6 +1,7 @@
 from typing import Dict
 from pathlib import Path
 
+from borca.task import generateTasks, TaskGraph
 from borca.util import createLogger
 from borca.exceptions import InvalidTomlPath
 
@@ -19,5 +20,7 @@ class Orchestrator:
 
         self.__logger.info(f"Using {self.__toml}")
 
+        self.__graph = TaskGraph(self.__config, generateTasks(self.__config, self.__toml))
+
     def run(self) -> None:
-        print('run me')
+        self.__graph.execute()
