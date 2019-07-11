@@ -14,9 +14,6 @@ mypy = "=0.711"
 bandit = "=1.6.2"
 black = "=19.3b0"
 
-[tool.poetry.scripts]
-main = "borca:main"
-
 [tool.black]
 check = true
 verbose = true
