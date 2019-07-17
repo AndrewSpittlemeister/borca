@@ -6,9 +6,9 @@ from borca.util import createLogger
 
 
 class TaskGraph:
-    def __init__(self, config: Dict, tasks: List[Task]) -> None:
+    def __init__(self, config: Dict, tasks: Dict[str, Task]) -> None:
         self.__config = config
-        self.__taskList = tasks
+        self.__tasks = tasks
         self.__logger = createLogger('borca.TaskGraph', self.__config['verbosity'])
 
         self.__root = self.__buildLinkedGraph()
