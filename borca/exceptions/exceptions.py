@@ -12,6 +12,18 @@ class InvalidTomlPath(BorcaException):
     pass
 
 
+class InvalidToolConfiguration(BorcaException):
+    '''An exception denoting an incorrect data configuration found in the TOML file under the borca.tool heading.'''
+
+    pass
+
+
+class InvalidTaskConfiguration(BorcaException):
+    '''An exception denoting an incorrect data configuration found in the TOML file under a borca.tool.task heading.'''
+
+    pass
+
+
 def exception_guard(exception):
     def decorator(func):
         def runner(*args, **kwargs):

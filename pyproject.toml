@@ -23,8 +23,31 @@ skip-string-normalization = true
 
 [tool.borca]
 default-task = "build"
-no-hash = false
-verbosity = 1
+
+[[tool.borca.task]]
+name = "build"
+commands = [
+    "poetry build --format wheel"
+]
+
+[[tool.borca.task]]
+name = "test"
+commands = [
+    "poetry run pytest"
+]
+
+[[tool.borca.task]]
+name = "security-check"
+commands = [
+    "poetry run bandit -r borca"
+]
+
+[[tool.borca.task]]
+name = "lint"
+commands = [
+    "poetry run mypy borca",
+    "poetry run black borca"
+]
 
 [build-system]
 requires = ["poetry>=0.12"]

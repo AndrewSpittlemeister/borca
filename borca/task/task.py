@@ -11,13 +11,3 @@ class Task:
 
     def execute(self) -> None:
         raise NotImplementedError
-
-
-def generateTasks(config: Dict, tomlfile: Path) -> Dict[str, Task]:
-    '''Load the tomlfile into memory and parse out borca config & tasks.'''
-
-    toml_data = toml.load(str(tomlfile))
-    print(json.dumps(toml_data, indent=4))
-
-    toml_data['']
-    exit(0)
