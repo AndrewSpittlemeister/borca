@@ -3,7 +3,7 @@ class BorcaException(Exception):
         self.message = message
 
     def __str__(self) -> str:
-        return self.__class__.__name__ + ': ' + self.message
+        return self.message
 
 
 class InvalidTomlPath(BorcaException):

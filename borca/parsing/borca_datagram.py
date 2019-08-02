@@ -3,7 +3,7 @@ import json
 
 from borca.task import Task
 from borca.util import createLogger
-from borca.exceptions import InvalidToolConfiguration, InvalidTaskConfiguration
+from borca.exceptions import InvalidToolConfiguration
 
 
 class BorcaDatagram:
@@ -14,11 +14,12 @@ class BorcaDatagram:
 
         self.__logger.debug(f"TOML as JSON:\n{json.dumps(self.__toml_data, indent=4)}")
 
-        self.__default_task_name = self.__verifyAndGatherBorcaData()
+        self.__verifyAndGatherBorcaData()
+        self.__verifyTaskCollection()
 
         exit(0)  # FIXME: remove this later...
 
-    def __verifyAndGatherBorcaData(self) -> str:
+    def __verifyAndGatherBorcaData(self) -> None:
         '''Verifies that minimum information for the borca tool is present and is formatted correctly.'''
 
         if 'tool' not in self.__toml_data.keys():
@@ -36,9 +37,33 @@ class BorcaDatagram:
         if self.__toml_data['tool']['borca']['default-task'] == "":
             raise InvalidToolConfiguration('Invalid value for the "default-task" field (must not be empty).')
 
+        self.__default_task_name = self.__toml_data['tool']['borca']['default-task']
+
         self.__logger.debug(f"Borca data as JSON:\n{json.dumps(self.__toml_data['tool']['borca'], indent=4)}")
 
-        return self.__toml_data['tool']['borca']['default-task']
+        if 'task' not in self.__toml_data['tool']['borca']:
+            raise InvalidToolConfiguration('Heading for "tool.borca.task" not found in pyproject.toml.')
+        
+        if type(self.__toml_data['tool']['borca']['task']) is not list:
+            raise InvalidToolConfiguration('Invalid type found for "tool.borca.task" (must be a list).')
+
+        if len(self.__toml_data['tool']['borca']['task']) < 1:
+            raise InvalidToolConfiguration('Must have at least one task.')
+
+        for task_data in self.__toml_data['tool']['borca']['task']:
+            if type(task_data) is not dict:
+                raise InvalidToolConfiguration('Tasks must be of dictionary type in toml format.')
+        
+        self.__task_list = [Task(task_data) for task_data in self.__toml_data['tool']['borca']['task']]
+
+    def __verifyTaskCollection(self) -> None:
+        names = set([task.name for task in self.__task_list])
+
+        if len(names) != len(self.__task_list):
+            raise InvalidToolConfiguration('Found multiple tasks with the same name.')
+
+        if self.__default_task_name not in names:
+            raise InvalidToolConfiguration('Default task name was not found in defined tasks.')
 
     def getTaskMap(self) -> Dict[str, Task]:
         raise NotImplementedError
