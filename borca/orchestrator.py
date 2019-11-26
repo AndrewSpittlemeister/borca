@@ -3,8 +3,8 @@ from pathlib import Path
 
 import toml
 
-from borca.parsing import BorcaDatagram
-from borca.task import TaskGraph
+from borca.parsing import Parser
+from borca.execution import Executor
 from borca.util import createLogger
 from borca.exceptions import InvalidTomlPath
 
@@ -25,9 +25,9 @@ class Orchestrator:
 
         self.__toml_data = toml.load(str(self.__toml))
 
-        self.__datagram = BorcaDatagram(self.__config, self.__toml_data)
+        self.__parser = Parser(self.__config, self.__toml_data)
 
-        self.__graph = TaskGraph(self.__config, self.__datagram.getTaskMap())
+        self.__executor = Executor(self.__config, self.__parser.orderedTasks())
 
     def run(self) -> None:
-        self.__graph.execute()
+        self.__executor.run()

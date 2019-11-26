@@ -1,12 +1,16 @@
 [tool.poetry]
 name = "borca"
-version = "0.1.0"
-description = ""
+version = "0.2.0"
+description = "Lightweight task graph execution defined with pyproject.toml files."
 authors = ["Andrew Spittlemeister <andrew.spittlemeister@gmail.com>"]
+
+[tool.poetry.scripts]
+borca = "borca.__main__:main"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-toml = "=0.10.0"
+toml = "^0.10.0"
+pydantic = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "=5.0.0"
@@ -22,31 +26,41 @@ diff = true
 skip-string-normalization = true
 
 [tool.borca]
-default-task = "build"
+default_task = "build"
 
-[[tool.borca.task]]
+[[tool.borca.tasks]]
 name = "build"
 commands = [
     "poetry build --format wheel"
 ]
+depends_on = [
+    "test"
+]
 
-[[tool.borca.task]]
+[[tool.borca.tasks]]
 name = "test"
 commands = [
-    "poetry run pytest"
+    "pytest"
+]
+depends_on = [
+    "lint",
+    "security-check"
 ]
 
-[[tool.borca.task]]
+[[tool.borca.tasks]]
 name = "security-check"
 commands = [
-    "poetry run bandit -r borca"
+    "bandit -r borca"
+]
+depends_on = [
+    "lint"
 ]
 
-[[tool.borca.task]]
+[[tool.borca.tasks]]
 name = "lint"
 commands = [
-    "poetry run mypy borca",
-    "poetry run black borca"
+    "mypy borca",
+    "black borca"
 ]
 
 [build-system]

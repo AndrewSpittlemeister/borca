@@ -1,1 +1,2 @@
-from borca.parsing.borca_datagram import BorcaDatagram
+from borca.parsing.data_format import Task, BorcaData
+from borca.parsing.parser import Parser

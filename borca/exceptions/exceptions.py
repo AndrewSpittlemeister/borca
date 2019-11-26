@@ -24,6 +24,12 @@ class InvalidTaskConfiguration(BorcaException):
     pass
 
 
+class InvalidTaskgraph(BorcaException):
+    '''An exception denoting an incorrect construction of the DAG task graph.'''
+
+    pass
+
+
 def exception_guard(exception):
     def decorator(func):
         def runner(*args, **kwargs):
