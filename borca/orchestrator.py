@@ -30,4 +30,10 @@ class Orchestrator:
         self.__executor = Executor(self.__config, self.__parser.orderedTasks())
 
     def run(self) -> None:
-        self.__executor.run()
+        total_tasks, completed_tasks, cached_tasks = self.__executor.run()
+
+        print(
+            f"\n======= [BORCA SUMMARY] =======",
+            f"\nTotal Tasks: {total_tasks}" f"\nCompleted Tasks: {completed_tasks}" f"\nCached Tasks: {cached_tasks}",
+            f"\n===============================",
+        )

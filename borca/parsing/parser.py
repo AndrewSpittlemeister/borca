@@ -10,7 +10,7 @@ from borca.exceptions import InvalidToolConfiguration, InvalidTaskgraph
 
 class Parser:
     def __init__(self, config: Dict, toml_data: MutableMapping[str, Any]) -> None:
-        self.__logger = createLogger('borca.parsing.BorcaDatagram', config['verbosity'])
+        self.__logger = createLogger('borca.parsing.Parser', config['verbosity'])
         self.__config = config
         self.__toml_data = toml_data
 
@@ -78,7 +78,7 @@ class Parser:
                     visited.pop()
 
                 if task not in ordered:
-                    print(f"adding task from else {task.name}")
+                    # print(f"adding task from else {task.name}")
                     ordered.append(task)
 
             return ordered

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "borca"
-version = "0.2.0"
+version = "2020.1"
 description = "Lightweight task graph execution defined with pyproject.toml files."
 authors = ["Andrew Spittlemeister <andrew.spittlemeister@gmail.com>"]
 

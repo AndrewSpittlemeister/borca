@@ -14,7 +14,7 @@ def createLogger(name: str, level: int) -> logging.Logger:
     logger.setLevel(loggingLevel)
     ch = logging.StreamHandler()
     ch.setLevel(loggingLevel)
-    ch.setFormatter(logging.Formatter('%(levelname)s %(name)s - %(message)s'))
+    ch.setFormatter(logging.Formatter('[BORCA] %(levelname)s %(name)s - %(message)s'))
     logger.addHandler(ch)
 
     return logger
