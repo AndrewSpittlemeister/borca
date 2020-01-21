@@ -5,6 +5,7 @@ authors = ["Andrew Spittlemeister <andrew.spittlemeister@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://gitlab.com/AndrewSpittlemeister/borca"
+homepage = "https://gitlab.com/AndrewSpittlemeister/borca"
 description = "Lightweight task graph execution defined with pyproject.toml files."
 keywords = ["build tool", "task", "tasks", "make"]
 classifiers = [
