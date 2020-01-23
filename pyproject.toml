@@ -4,8 +4,8 @@ version = "2020.1"
 authors = ["Andrew Spittlemeister <andrew.spittlemeister@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://gitlab.com/AndrewSpittlemeister/borca"
-homepage = "https://gitlab.com/AndrewSpittlemeister/borca"
+repository = "https://github.com/AndrewSpittlemeister/borca"
+homepage = "https://github.com/AndrewSpittlemeister/borca"
 description = "Lightweight task graph execution defined with pyproject.toml files."
 keywords = ["build tool", "task", "tasks", "make"]
 classifiers = [
@@ -31,6 +31,7 @@ pytest = "^5"
 mypy = "^0"
 bandit = "^1.6.2"
 black = "^19.10b0"
+twine = "^3"
 
 [tool.black]
 check = true

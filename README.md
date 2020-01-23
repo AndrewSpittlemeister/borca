@@ -10,6 +10,14 @@ A PEP 518 compatible, explicit build orchestration (*"borca"*, it's a stretch; I
 - [x] Optionally define custom `.toml` file path
 - [ ] Incremental builds with task state caching
 
+## Installation
+Recommended installation is with `pip`:
+```
+pip install borca
+```
+
+Or even better, add it to the developer dependencies in your `pyproject.toml` file.
+
 ## Example Usage
 Borca actually uses borca itself, so take a look at its own [pyproject.toml](https://gitlab.com/AndrewSpittlemeister/borca/blob/master/pyproject.toml) file and take a look at how it is structured. I generally use borca in the context of a virtual environment management tool such as `poetry` or `flit`.
 
