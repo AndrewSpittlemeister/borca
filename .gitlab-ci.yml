@@ -34,7 +34,7 @@ build:
         - /^release/.*$/@AndrewSpittlemeister/borca
     script:
         - poetry build --format wheel
-        - cp dist/sample_package-*.whl .
+        - cp dist/borca-*.whl .
     artifacts:
         paths:
-            - sample_package-*.whl
+            - borca-*.whl
