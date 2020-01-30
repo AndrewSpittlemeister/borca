@@ -8,7 +8,7 @@ A PEP 518 compatible, explicit build orchestration (*"borca"*, it's a stretch; I
 - [x] Acyclic task graph generation
 - [x] Define default task
 - [x] Optionally define custom `.toml` file path
-- [ ] Incremental builds with task state caching
+- [x] Incremental builds with task state caching
 
 ## Installation
 Recommended installation is with `pip`:
@@ -47,6 +47,22 @@ optional arguments:
                         specify alternate path to pyproject.toml file
   --verbosity {0,1,2}   specify verbosity 0, 1, or 2 (default 1)
 ```
+
+### Configuration
+Borca uses the `[tool.borca]` heading in the `pyproject.toml` file to define configuration and the `[[tool.borca.tasks]]` list-like heading to define each task. The following are required and optional values for borca as well as their intended types.
+
+**`[tool.borca]`**
+- Required:
+  - `default_task`: `str` (where this is the name of some defined task)
+
+**`[[tool.borca.tasks]]`**
+- Required:
+  - `name`: `str` (where this is a unique name for a task in the project scope)
+  - `commands`: `List[str]` (where this is a list of commands to be executed in the default shell)
+- Optional:
+  - `depends_on`: `List[str]` (where this is a list of other task names that this task depends on)
+  - `input_paths`: `List[str]` (where this is a list of glob patterns defining the tasks input files for task caching purposes)
+  - `output_paths`: `List[str]` (where this is a list of glob patterns defining the tasks output files for task caching purposes)
 
 ## Note on Development Process
 This is a tool I made primarily for myself; and as you can probably see from the commit history, I don't work on it very often. I work as a full-time software engineer and am getting my Master's in CS at the same time as well, so I don't find myself devoting a lot of time to side projects. That being said, feel free post issues or merge requests on GitLab. On that note, if you are seeing this on GitHub, be aware that development for this is actually done on GitLab due to its dope CI/CD features.

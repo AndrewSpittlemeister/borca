@@ -45,38 +45,27 @@ default_task = "build"
 
 [[tool.borca.tasks]]
 name = "build"
-commands = [
-    "poetry build --format wheel"
-]
-depends_on = [
-    "test"
-]
+commands = ["poetry build --format wheel"]
+depends_on = ["test"]
+input_paths = ["./borca/**/*.py", "./tests/**/*.py"]
+output_paths = ["./dist/borca-*.whl"]
 
 [[tool.borca.tasks]]
 name = "test"
-commands = [
-    "pytest"
-]
-depends_on = [
-    "lint",
-    "security-check"
-]
+commands = ["pytest"]
+depends_on = ["lint", "security-check"]
+input_paths = ["./borca/**/*.py", "./tests/**/*.py"]
 
 [[tool.borca.tasks]]
 name = "security-check"
-commands = [
-    "bandit -r borca"
-]
-depends_on = [
-    "lint"
-]
+commands = ["bandit -r borca"]
+input_paths = ["./borca/**/*.py"]
+depends_on = ["lint"]
 
 [[tool.borca.tasks]]
 name = "lint"
-commands = [
-    "mypy borca",
-    "black borca"
-]
+commands = ["mypy borca", "black borca"]
+input_paths = ["./borca/**/*.py"]
 
 [build-system]
 requires = ["poetry>=1.0"]

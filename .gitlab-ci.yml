@@ -10,7 +10,7 @@ before_script:
     - python -m pip install --upgrade pip
     - pip install --upgrade setuptools
     - pip install poetry
-    - poetry install
+    - poetry update
 
 lint:
     stage: lint

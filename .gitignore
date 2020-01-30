@@ -2,6 +2,7 @@
 .vscode
 .pytest_cache
 .mypy_cache
+.borca_cache
 .venv
 __pycache__
 *.egg-info
