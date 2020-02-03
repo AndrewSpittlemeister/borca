@@ -36,7 +36,10 @@ class Parser:
         if len(names) != len(self.__data.tasks):
             raise InvalidToolConfiguration('Found multiple tasks with the same name.')
 
-        root = self.__config.get("task-name", self.__data.default_task)
+        root = self.__config.get("task-name")
+        if root is None:
+            root = self.__data.default_task
+            self.__logger.info(f"Using default task: {self.__data.default_task}")
 
         if root not in names:
             raise InvalidToolConfiguration('Default or specified task name was not found in defined tasks.')
