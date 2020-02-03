@@ -52,16 +52,12 @@ class Executor:
             self.__logger.info("Caching will neither be used or updated.")
 
         for task in self.__tasks:
-            found_valid_task_hashes: bool = False
-
             if (not self.__config["no_hash"]) and (len(task.input_paths) + len(task.output_paths) > 0):
 
                 try:
                     current_task_hash_in, current_task_hash_out = self.__getCurrentTaskHash(
                         task.name, task.input_paths, task.output_paths
                     )
-
-                    found_valid_task_hashes = True
 
                     if check_cache:
                         cached_task_hash_in, cached_task_hash_out = self.__getCachedTaskHash(task.name)
@@ -100,8 +96,16 @@ class Executor:
             self.__logger.info(f"Completed task: {task.name}")
             completed_tasks += 1
 
-            if found_valid_task_hashes:
-                self.__cacheTask(task.name, current_task_hash_in, current_task_hash_out)
+            if (not self.__config["no_hash"]) and (len(task.input_paths) + len(task.output_paths) > 0):
+
+                try:
+                    current_task_hash_in, current_task_hash_out = self.__getCurrentTaskHash(
+                        task.name, task.input_paths, task.output_paths
+                    )
+                    self.__cacheTask(task.name, current_task_hash_in, current_task_hash_out)
+
+                except BorcaException as e:
+                    self.__logger.warn(f"{e}")
 
         return len(self.__tasks), completed_tasks, cached_tasks
 
