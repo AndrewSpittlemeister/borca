@@ -5,7 +5,7 @@ from borca import Orchestrator
 def main() -> None:
     parser = ArgumentParser(description="Python build orchestration tool.")
 
-    parser.add_argument("task-name", help="name of the task to execute")
+    parser.add_argument("task-name", nargs='?', help="name of the task to execute")
     parser.add_argument("--no-hash", action="store_true", help="does not use or generate task I/O hash")
     parser.add_argument(
         "--toml-path", type=str, default="pyproject.toml", help="specify alternate path to pyproject.toml file"

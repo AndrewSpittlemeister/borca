@@ -10,6 +10,7 @@ before_script:
     - python -m pip install --upgrade pip
     - pip install --upgrade setuptools
     - pip install poetry
+    - poetry config virtualenvs.in-project true
     - poetry update
 
 lint:
@@ -26,7 +27,7 @@ security-check:
 test:
     stage: test
     script:
-        - poetry run pytest
+        - poetry run pytest -vv --cov=borca
 
 build:
     stage: build
