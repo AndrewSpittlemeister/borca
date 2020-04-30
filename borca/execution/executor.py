@@ -79,9 +79,9 @@ class Executor:
                 self.__logger.debug(f"Running command: {command}")
 
                 if self.__config["verbosity"] == 0:
-                    proc = subprocess.run(command, capture_output=True)  # nosec
+                    proc = subprocess.run(command, shell=True, capture_output=True)  # nosec
                 else:
-                    proc = subprocess.run(command)  # nosec
+                    proc = subprocess.run(command, shell=True)  # nosec
 
                 try:
                     proc.check_returncode()

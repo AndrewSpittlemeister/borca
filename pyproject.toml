@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "borca"
-version = "2020.2"
+version = "2020.5"
 authors = ["Andrew Spittlemeister <andrew.spittlemeister@gmail.com>"]
 license = "MIT"
 readme = "README.md"

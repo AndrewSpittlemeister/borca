@@ -1,3 +1,3 @@
-__version__ = '2020.2'
+__version__ = '2020.5'
 
 from borca.orchestrator import Orchestrator
